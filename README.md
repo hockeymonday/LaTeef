@@ -23,8 +23,8 @@ LaTeef allows for customization of:
 * Root (all 12-tone chromatic notes) 
  
 _Inversions are automatically applied algorithmically based off of the current chordal state (sequence of chords that preceeded the current chord)._
-**
-Exporting to MIDI means that you can load it in on any software instrument you could want!**
+
+**Exporting to MIDI means that you can load it in on any software instrument you could want!**
 
 ## See the interface below:
 
