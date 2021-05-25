@@ -1,4 +1,6 @@
 import tkinter as GUI
+from tkinter.filedialog import askdirectory
+import engine
 
 
 class App():
@@ -37,18 +39,21 @@ class App():
         type_message = "Select the type of chord"
         message1 = GUI.Message(self.main_window, text=type_message)
         message1.config(bg="#427446", fg="#F5F7F9",
-                       width=200, font=("Helvetica", 16, "italic"))
+                        width=200, font=("Helvetica", 16, "italic"))
         message1.place(rely=0.28)
 
         # chord type radio button
         chord_color = GUI.StringVar()
         for c_type in self.chord_types:
             r = GUI.Radiobutton(self.main_window, text=c_type,
-                                variable=chord_color, bg="#2B292B", fg="#F5F7F9",
+                                variable=chord_color, bg="#2B292B",
+                                fg="#F5F7F9",
                                 font=("Helvetica", 12, "italic"), height=5,
-                                value=str(self.chord_types.index(c_type)+1),
+                                value=str(self.chord_types.index(c_type) + 1),
                                 selectcolor='navy',
-                                command=(lambda name=c_type: self.chord_type_radio(name)))
+                                command=(
+                                    lambda name=c_type: self.chord_type_radio(
+                                        name)))
             r.grid(row=2, column=self.chord_types.index(c_type))
 
         # tension level message
@@ -56,25 +61,28 @@ class App():
         message2 = GUI.Message(self.main_window, text=tension_message)
         message2.config(bg="#8A3427", fg="#F5F7F9",
                         width=200, font=("Helvetica", 16, "italic"))
-        message2.place(relx=.475,rely=0.28)
+        message2.place(relx=.475, rely=0.28)
 
         # tension level radio button
         tension_level = GUI.StringVar()
         for tension in self.tension_levels:
             t = GUI.Radiobutton(self.main_window, text=tension,
-                                    variable=tension_level, bg="#2B292B",
-                                    fg="#F5F7F9",
-                                    font=("Helvetica", 12, "italic"), height=5,
-                                    value=str(self.tension_levels.index(tension) +1),
-                                    selectcolor='navy',
-                                    command=(lambda name=tension: self.tension_level_radio(name)))
+                                variable=tension_level, bg="#2B292B",
+                                fg="#F5F7F9",
+                                font=("Helvetica", 12, "italic"), height=5,
+                                value=str(
+                                    self.tension_levels.index(tension) + 1),
+                                selectcolor='navy',
+                                command=(lambda
+                                             name=tension: self.tension_level_radio(
+                                    name)))
             t.grid(row=2, column=5 + self.tension_levels.index(tension))
 
         self.main_window.config(width=850, heigh=700)
 
         # written chord text
         GUI.Label(self.main_window, text='Chords: ').grid(row=4)
-        t1 = GUI.Text(self.main_window, height=20, state=GUI.DISABLED)
+        t1 = GUI.Text(self.main_window, height=20, width=75, state=GUI.DISABLED)
         t1.place(relx=.1, rely=.5)
         self.chordbox = t1
 
@@ -86,28 +94,42 @@ class App():
                           bd=0)
         back.grid(row=2, column=9)
 
+        # button to write to midi file
+        write_midi = GUI.Button(self.main_window, text="Write to MIDI",
+                                width=10, height=2,
+                                command=lambda: self.send_to_logic(),
+                                bg="#3C6A5D",
+                                fg="#F5F7F9", font=("Helvetica", 14, "bold"),
+                                bd=0)
+        write_midi.place(relx=.815, rely=.53)
+
         # launch gui window
         self.main_window.mainloop()
 
     def button_function(self, name):
         self.chord = name
         self.chordbox.config(state=GUI.NORMAL)
-        chord_unit = name + ' '+ self.selected_chord_type + self.tension_level
-        self.chordbox.insert(GUI.END,  chord_unit + ",")
+        chord_unit = name + ' ' + self.selected_chord_type + self.tension_level
+        self.chordbox.insert(GUI.END, chord_unit + ",")
         self.chordbox.config(state=GUI.DISABLED)
         self.chord_sequence.append(chord_unit)
         print(name)
 
+    def send_to_logic(self):
+        path = askdirectory(parent=self.main_window, title="Please select a directory to write the midi file to")
+        engine.Engine(self.chord_sequence, path)
+        # self.main_window.destroy()
+
     def remove_chord(self):
-        text = self.chordbox.get(1.0, GUI.END+"-1c")
+        text = self.chordbox.get(1.0, GUI.END + "-1c")
         if len(text) > 0:
-            for i in range(len(text)-2, -1, -1):
+            for i in range(len(text) - 2, -1, -1):
                 if text[i] == ',':
                     break
         self.chordbox.config(state=GUI.NORMAL)
-        i = i-1 if i<3 else i
+        i = i - 1 if i < 3 else i
         self.chordbox.delete('1.0', GUI.END)
-        self.chordbox.insert('1.0', text[:i+1])
+        self.chordbox.insert('1.0', text[:i + 1])
         self.chordbox.config(state=GUI.DISABLED)
         self.chord_sequence.remove(self.chord_sequence[-1])
 
@@ -120,11 +142,13 @@ class App():
     # add a button with [name] as the text
     def add_button(self, name):
         return GUI.Button(self.main_window, text=name, width=5, height=2,
-                              command=(lambda n=name: self.button_function(n)), bg="#426796",
-                              fg="#F5F7F9", font=("Helvetica", 16, "bold"),
-                              bd=0)
+                          command=(lambda n=name: self.button_function(n)),
+                          bg="#426796",
+                          fg="#F5F7F9", font=("Helvetica", 16, "bold"),
+                          bd=0)
 
     def fun(self):
         pass
+
 
 e = App()
