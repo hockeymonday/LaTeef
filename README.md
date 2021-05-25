@@ -17,7 +17,12 @@ and we should be up and running!
 
 ## Create chord progressions with the touch of a button as smoothly and customizably as possible.
 
-LaTeef allows for customization of tension levels (7, 9, or 11/13 chords), chord senority (minor, major, or dominant), and root (all 12-tone chromatic notes). Inversions are automatically applied algorithmically based off of the current chordal state (sequence of chords that preceeded the current chord).
+LaTeef allows for customization of: 
+* Tension levels (7, 9, or 11/13 chords)
+* Chord senority (minor, major, or dominant)
+* Root (all 12-tone chromatic notes) 
+ 
+_Inversions are automatically applied algorithmically based off of the current chordal state (sequence of chords that preceeded the current chord)._
 
 Exporting to MIDI means that you can load it in on any software instrument you could want!
 
