@@ -3,7 +3,7 @@ A customizable and automated chordal jazz voice-leading engine.
 
 Create MIDI chord progressions with smooth algorithmic voice leading!
 
-_Confused about what this does? No worries, see the demo video:_
+_Confused about what this does? No worries, see the demo video:_https://youtu.be/iejvzTA3V6s
 
 # Installation:
 
