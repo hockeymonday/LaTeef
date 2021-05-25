@@ -15,13 +15,13 @@ then you can run...
 
 and we should be up and running!
 
-Create chord progressions with the touch of a button as smoothly and customizably as possible.
+## Create chord progressions with the touch of a button as smoothly and customizably as possible.
 
 LaTeef allows for customization of tension levels, chord senority, and root. Inversions are automatically applied algorithmically based off of the current chordal state (sequence of chords that preceeded the current chord).
 
 Exporting to MIDI means that you can load it in on any software instrument you could want!
 
-# See the interface below:
+## See the interface below:
 
 ![image](https://user-images.githubusercontent.com/58797934/119495304-480fb180-bd30-11eb-884d-feb2e29de73f.png)
 
