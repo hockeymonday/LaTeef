@@ -114,11 +114,11 @@ class App:
         self.chord_sequence.append(chord_unit)
 
     def send_to_logic(self):
-        with open("chord_seq.txt", "w") as output:
+        with open("./LaTeef/chord_seq.txt", "w") as output:
             output.truncate(0)
             output.write(str(self.chord_sequence))
 
-        with open("chord_seq.txt", "w") as out:
+        with open("./Lateef/chord_seq.txt", "w") as out:
             for row in self.chord_sequence:
                 s = "".join(map(str, row))+','
                 out.write(s)
