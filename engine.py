@@ -29,7 +29,7 @@ class Engine:
                 midi.addNote(track=0, channel=0, pitch=int(note), time=time, duration=3, volume=100)
 
             time += 3
-        binfile = open("./output.mid", 'wb')
+        binfile = open("./Lateef/output.mid", 'wb')
         midi.writeFile(binfile)
         binfile.close()
 

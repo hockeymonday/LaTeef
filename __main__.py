@@ -4,7 +4,7 @@ import engine
 
 def main():
     app.App()
-    engine.Engine('./chord_seq.txt')
+    engine.Engine('./LaTeef/chord_seq.txt')
 
 
 if __name__ == '__main__':
