@@ -1,9 +1,8 @@
 import tkinter as GUI
-from tkinter.filedialog import askdirectory
 import engine
 
 
-class App():
+class App:
     chord_names = ["A", "A#/Bb", "B", "C", "C#/Db", "D", "D#/Eb", "E", "F",
                    "F#/Gb", "G"]
     chord_types = ["Dom", "Maj", "Min"]
@@ -113,12 +112,17 @@ class App():
         self.chordbox.insert(GUI.END, chord_unit + ",")
         self.chordbox.config(state=GUI.DISABLED)
         self.chord_sequence.append(chord_unit)
-        print(name)
 
     def send_to_logic(self):
-        path = askdirectory(parent=self.main_window, title="Please select a directory to write the midi file to")
-        engine.Engine(self.chord_sequence, path)
-        # self.main_window.destroy()
+        with open("chord_seq.txt", "w") as output:
+            output.truncate(0)
+            output.write(str(self.chord_sequence))
+
+        with open("chord_seq.txt", "w") as out:
+            for row in self.chord_sequence:
+                s = "".join(map(str, row))+','
+                out.write(s)
+        self.main_window.destroy()
 
     def remove_chord(self):
         text = self.chordbox.get(1.0, GUI.END + "-1c")
@@ -146,9 +150,3 @@ class App():
                           bg="#426796",
                           fg="#F5F7F9", font=("Helvetica", 16, "bold"),
                           bd=0)
-
-    def fun(self):
-        pass
-
-
-e = App()
